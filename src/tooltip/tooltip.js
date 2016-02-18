@@ -431,12 +431,14 @@ angular.module('ui.bootstrap.tooltip', ['ui.bootstrap.position', 'ui.bootstrap.s
                 );
               } else {
                 observers.push(
-                  attrs.$observe(ttType, function(val) {
-                    ttScope.content = val;
-                    if (!val && ttScope.isOpen) {
-                      hide();
-                    } else {
-                      positionTooltip();
+                  attrs.$observe(ttType, function (val) {
+                    if (ttScope) {
+                      ttScope.content = val;
+                      if (!val && ttScope.isOpen) {
+                        hide();
+                      } else {
+                        positionTooltip();
+                      }
                     }
                   })
                 );
